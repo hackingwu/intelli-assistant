@@ -1,1 +1,3 @@
 # intellij-assistant
+## server
+## weapp
