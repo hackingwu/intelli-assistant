@@ -1,0 +1,60 @@
+<view>
+<van-notify id="van-notify" />
+  
+      <van-cell-group>
+        <van-field
+          model:value="{{ scheduleTitle }}"
+          placeholder=""
+          label="日程标题："
+          autosize
+          border="{{ false }}"
+        />
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          value="{{ scheduleLocation }}"
+          placeholder=""
+          label="日程地点："
+          border="{{ false }}"
+          bind:change="onScheduleLocationChange"
+        />
+      </van-cell-group> 
+
+      <van-field value="{{scheduleFromDateTimeStr}}" label="开始时间" readonly="true" clickable="true" bind:click-input="onScheduleFromDateTimeClick"/>
+      <van-popup show = "{{scheduleFromDateTimeShow}}"  position="bottom" bind:close="onScheduleFromDateTimeClose">
+      <van-datetime-picker
+        type="datetime"
+        value="{{ scheduleFromDateTime }}"
+        show-toolbar
+        title="设置开始时间"
+        bind:confirm="onScheduleFromDateTimeConfirm"
+        bind:cancel="onScheduleFromDateTimeClose"
+      />
+      </van-popup>
+
+      <van-field
+          model:value="{{ scheduleDescription }}"
+          type="textarea"
+          placeholder=""
+          label="日程描述："
+          autosize
+          border="{{ false }}"
+        />
+      
+      <van-field value="{{scheduleAlarmText}}" label="提醒" readonly="true" clickable="true" bind:click-input="onScheduleAlarmInputClick"/>
+      <van-popup show="{{ scheduleAlarmPickerShow }}"  position="bottom" bind:close="onAlarmOptionCancel">
+        <van-picker class=".scheduleAlarmPicker" columns="{{ alarmOptions }}" default-index="{{defaultAlaramOption}}" bind:cancel="onAlarmOptionCancel"
+  bind:confirm="onAlarmOptionConfirm"  title="设置提醒时间" show-toolbar/>
+      </van-popup>
+      
+        <van-button type="warning" icon="replay"  block bind:click="retry">识别不准，重新识别</van-button> 
+
+<van-button type="primary"  icon="guide-o" block bind:click="onScheduleCreate" custom-style="margin-top:10px;">创建日程
+</van-button>
+    
+
+  
+
+
+
+</view>

@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+      "van-tab": "@vant/weapp/tab/index",
+      "van-tabs": "@vant/weapp/tabs/index",
+    "van-empty": "@vant/weapp/empty/index"
+
+  },
+  "navigationBarTitleText": "日程列表",
+  "navigationBarBackgroundColor": "#ffffff"
+}

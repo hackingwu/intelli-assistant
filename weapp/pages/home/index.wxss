@@ -1,0 +1,177 @@
+
+
+
+
+.top-image {
+  /* 设置 top-image 区域的样式，可以根据实际情况调整 */
+  /* ... */
+  position: relative; 
+  align-items: center;/* 垂直居中 */
+}
+
+.top-image-image {
+  width: 100%; /* 设置图片宽度 */
+  height: 200px; /* 设置一个固定的高度 */
+  object-fit: cover; /* 图片按比例缩放，保持图片完整显示在容器内 */
+  
+}
+.text-container {
+  /* 文字区域样式 */
+  margin-left: 10px; /* 调整文字和图片之间的间距，根据实际情况调整 */
+  display: flex;
+  position: absolute;
+  top: 60px; /* 文字容器距离图片顶部的距离，根据实际情况调整 */
+  flex-direction: column; /* 将文字纵向排列 */
+  justify-content: center; /* 垂直居中对齐文字 */
+}
+
+
+
+.top-image-text-primary {
+  /* 设置文字样式，实现靠左对齐 */
+  /* ... */
+  font-weight: bold;
+  font-size: 16px;
+  /* margin-left: 10px; 调整文字与图片之间的间距，根据需要自行调整 */
+}
+.top-image-description {
+  margin-top: 10px;
+  margin-left:20px;
+  font-size: 14px;
+  /* margin-left: 10px; 调整文字与图片之间的间距，根据需要自行调整 */
+}
+.white-box {
+  /* 设置圆角白底区域样式 */
+  background-color: #ffffff;
+  border-radius: 20px 20px 0 0; /* 顶部左右为圆角，底部不是圆角 */
+  padding: 10px; /* 可根据需要调整内边距 */
+  align-items: center; /* 将按钮容器内的内容居中显示 */
+
+}
+
+.buttonScanTxt, .buttonScanImg, .buttonScanPdf {
+  /* 设置按钮样式 */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 水平居中按钮容器内的内容 */
+  margin-bottom: 20px; /* 可根据需要调整按钮之间的间距 */
+  border-radius: 10px; /* 设置按钮的圆角 */
+  padding: 10px; /* 设置按钮的内边距 */
+}
+.buttonScanTxt {
+    background-color: #ebf0ff;
+}
+.buttonScanImg {
+    background-color: #fffae9;
+}
+.buttonScanPdf {
+    background-color: #f7f7f7;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+
+.button-image {
+  width: 60px; /* 设置按钮图片宽度 */
+  height: 60px; /* 设置按钮图片高度 */
+  /* 这里可以设置图片样式，比如圆角等 */
+}
+
+.button-text {
+  flex-direction: column; /* 将文字纵向排列 */
+  justify-content: center; /* 垂直居中对齐文字 */
+}
+
+.button-title {
+  /* 设置按钮标题样式 */
+  font-size: 18px;
+  font-weight: bold;
+  /* 这里可以设置标题的颜色等样式 */
+}
+
+.button-desc {
+  /* 设置按钮描述样式 */
+  font-size: 14px;
+  /* 这里可以设置描述的颜色等样式 */
+}
+
+.tip-text {
+  margin-left: 16px;
+  font-size: 22rpx;
+  color: #999;
+}
+
+
+
+.just-try {
+  margin-top: 10rpx;
+  padding: 16px;
+  border: none;
+  background-color: transparent;
+  font-size: 25rpx;
+  color: #007AFF;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.just-try:focus,
+.just-try:active {
+  text-decoration: none;
+  outline: none;
+}
+
+.mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.help-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.help-button {
+  display: flex;
+  align-items: center;
+  background-color: #3498db;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.help-icon {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.help-label {
+  font-size: 14px;
+}
+
+.help-content {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  right: -130px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: right 0.3s ease;
+  z-index: 1;
+}

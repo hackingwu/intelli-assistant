@@ -1,0 +1,14 @@
+{
+  "usingComponents": {
+    "privacy-popup": "../../components/privacyPopup/privacyPopup",
+    "van-button": "@vant/weapp/button/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-notify": "@vant/weapp/notify/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-icon": "@vant/weapp/icon/index"
+  },
+  "navigationBarTitleText": "智能日程",
+  "navigationBarBackgroundColor": "#bbecdc"
+}

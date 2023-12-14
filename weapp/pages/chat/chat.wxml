@@ -1,0 +1,47 @@
+<view class="container" data-weui-theme="{{theme}}" >
+  <view class="page-body">
+    <scroll-view class="msg-list" enable-back-to-top scroll-y="true" scroll-top="{{scrollTop}}">
+    
+      <view class="shuffle-container">
+      <text class="shuffle-text">欢迎来到人工智能时代v1.0.7</text>  <button class="shuffle-button" bindtap="shuffle" icon="./resources/refresh.png">随便问问</button>
+      </view>
+      <!-- <view class="container">
+      
+      <view class="preset-btn" wx:if="{{!showResult}}"><button class="preset-btn" bindtap="showOptions">预设角色</button></view>
+      <view class="result" wx:if="{{showResult}}">
+        <text class="result-text">{{result}}</text>
+      </view>
+      <view class="options" wx:if="{{showOptions}}">
+        <view class="option" bindtap="selectOption" data-option="option1">选项1</view>
+        <view class="option" bindtap="selectOption" data-option="option2">选项2</view>
+        <view class="option" bindtap="selectOption" data-option="option3">选项3</view>
+        <view class="option" bindtap="selectOption" data-option="option4">选项4</view>
+        <input class="input-box" wx:if="{{selectedOption}}" value="{{inputValue}}" bindinput="inputChange" />
+        <button class="confirm-btn" wx:if="{{selectedOption}}" bindtap="confirmOption">确定</button>
+      </view> 
+    </view> -->
+      <view wx:for="{{msg}}"  wx:key="$index">
+        <view wx:if="{{item.role == 'assistant'}}" class="friend">
+         <view> <image class="avatar" src="{{botAvatarUrl}}"/></view>
+         <view class="triangle">
+          <view class="b-triangle f-b-triangle"></view>
+          <view class="t-triangle f-t-triangle"></view>
+         </view>
+         <view class="item-msg">{{item.content}}</view>
+        </view>
+        <view wx:else class="self">
+         <view> <image class="avatar" src="{{avatarUrl}}"/></view>
+         <view class="triangle">
+          <view class="b-triangle s-b-triangle"></view>
+          <view class="t-triangle s-t-triangle"></view>
+         </view>
+         <view class="item-msg">{{item.content}}</view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="msg-input">
+      <textarea placeholder="可输入任意问题" class="send-input" auto-focus style="height:{{textareaHeight}}px; max-height: {{maxHeight}}px;" bindinput="msgContent" value="{{inputValue}}" maxlength="200"/>
+      <button class="{{sendMsgBtnClass}}" disabled= "{{sendMsgBtnDisabled}}" bindtap="sendMsg" loading="{{sendMsgBtnLoading}}" >{{sendMsgBtnTxt}}</button>
+    </view>
+  </view>
+</view>
