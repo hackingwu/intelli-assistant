@@ -15,6 +15,8 @@
 
 spring-boot + h2数据库
 
+src/main/resource/application.properties 把对应的项值填充了
+
 mvn clean install 就可以生成一个可执行的jar包，很简单。在前面放一个nginx，绑定域名既可以上线。
 
 [x] 用户管理（新建，查询，邀请评价）
@@ -26,6 +28,8 @@ mvn clean install 就可以生成一个可执行的jar包，很简单。在前�
 ## weapp
 
 用微信开发者 打开该目录即可
+
+app.js中的API_KEY，ADMIN_HOST按照你的实际情况填写好。 APK_KEY对应就是服务端项目的application.properties的server.api.key的值
 
 [x]从文本，图片，PDF识别日程，修改并创建
 
