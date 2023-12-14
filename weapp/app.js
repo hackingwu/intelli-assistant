@@ -4,8 +4,8 @@
 App({
   globalData: {
     needRetry: false,
-    API_KEY:'d8y4XLDphC1W9dtDgt68d9toAi7HXT1P7KCH25b4',
-    ADMIN_HOST: 'https://hichatgptn.xyz/admin',
+    API_KEY:'<server-api-key>',
+    ADMIN_HOST: 'https://xyz/admin',
     // ADMIN_HOST:"http://localhost:8080/admin",
     openid:'',
     inviteComment: false,
