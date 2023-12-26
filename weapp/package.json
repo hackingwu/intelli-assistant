@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@vant/weapp": "^1.10.21",
+    "blueimp-md5": "^2.19.0"
+  },
+  "devDependencies": {
+    "miniprogram-api-typings": "^3.10.0"
+  }
+}

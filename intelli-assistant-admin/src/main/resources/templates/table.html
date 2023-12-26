@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table Data</title>
+</head>
+<body>
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+    h1 {
+      color: #333333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .report {
+      background-color: #ffffff;
+      border: 1px solid #cccccc;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .report-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .report-item span {
+      font-weight: bold;
+    }
+    .report-item-column {
+<!--    display: flex;-->
+<!--    flex-direction: column;-->
+    margin-right: 20px;
+}
+</style>
+
+
+<h1>概览</h1>
+
+<div class="report">
+    <div class="report-item">
+        <div class="report-item-column">
+            <span>新用户：</span>
+            <span id="new-account" th:text="${freshAccountNum}"></span>
+        </div>
+        <div class="report-item-column">
+            <span>老用户回流：</span>
+            <span id="old-account" th:text="${oldAccountNum}"></span>
+        </div>
+    </div>
+    <div class="report-item">
+        <div class="report-item-column">
+
+        <span>重要操作次数：</span>
+        <span id="important-operations" th:text="${operationLogNum}"></span>
+        </div>
+        <div class="report-item-column">
+        <span>操作人数：</span>
+        <span id="unique-users" th:text="${operationAccountNum}"></span>
+        </div>
+    </div>
+
+    <div class="report-item">
+        <div class="report-item-column">
+        <span>新增日程个数：</span>
+        <span id="new-schedules" th:text="${scheduleNum}"></span>
+        </div>
+        <div class="report-item-column">
+        <span>创建日程的人数：</span>
+        <span id="schedule-creators" th:text="${scheduleAccountNum}"></span>
+        </div>
+    </div>
+
+
+</div>
+
+<div th:each="entry : ${statistics}">
+    <h2 th:text="'用户' +${entry.key}+'操作明细'"></h2>
+    <table>
+        <thead>
+        <tr>
+
+            <th>用户创建时间</th>
+            <th>用户操作时间</th>
+            <th>上一次操作时间</th>
+            <th>使用次数</th>
+            <th>操作类型</th>
+            <th width="30%">日程描述</th>
+            <th>日程摘要</th>
+            <!-- Add more table headers for each column -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row : ${entry.value}">
+            <td th:text="${row.userCreateTime}"></td>
+            <td th:text="${row.operatorTime}"></td>
+            <td th:text="${row.lastOperateTime}"></td>
+            <td th:text="${row.count}"></td>
+            <td th:text="${row.operatorType}"></td>
+            <td th:text="${row.scheduleDescription}"></td>
+            <td th:text="${row.scheduleMainInfo}"></td>
+            <!-- Add more table cells for each column -->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

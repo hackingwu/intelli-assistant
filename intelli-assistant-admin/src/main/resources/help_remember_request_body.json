@@ -1,0 +1,41 @@
+{
+  "functions": [
+    {
+      "name": "get_schedule_info",
+      "description": "Extract schedule information from a paragraph",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "one-sentence summary，如果是法院传票，则是案由。 "
+          },
+          "dateTimeFrom": {
+            "type": "string",
+            "description": "schedule start time, format is yyyy-MM-ddTHH:mm"
+          },
+          "location": {
+            "type": "string",
+            "description": "the schedule location"
+          }
+        },
+        "required": [
+          "title",
+          "dateTimeFrom",
+          "location"
+        ]
+      }
+    }
+  ],
+  "temperature": 0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "现在是%s，如果日程信息中小时缺失就默认是早晨8点，早上就是08:00, 中午是12:00,下午是14:00,傍晚是18:00,晚上是20:00,深夜是23:00。"
+    },
+    {
+      "role": "user",
+      "content": %s
+    }
+  ]
+}
