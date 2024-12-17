@@ -1,0 +1,24 @@
+<view class="sidebar-container {{show ? 'show' : ''}}">
+  <view class="sidebar-mask" bindtap="closeSidebar"></view>
+  <view class="sidebar-content">
+    <view class="sidebar-header">
+      <view class="user-avatar">
+        <image src="/static/head.jpg" mode="aspectFill"></image>
+      </view>
+      <view class="close-button" bindtap="closeSidebar">×</view>
+    </view>
+    <view class="sidebar-menu">
+      <view class="menu-item" bindtap="onSwitchToWelcome">
+        <text class="menu-icon">👋</text>
+        <text>欢迎</text>
+      </view>
+      <view class="menu-item" bindtap="onSwitchToHistory">
+        <text class="menu-icon">📅</text>
+        <text>历史任务</text>
+      </view>
+    </view>
+    <view class="sidebar-footer">
+      <text class="version-info">版本 1.0.0</text>
+    </view>
+  </view>
+</view>

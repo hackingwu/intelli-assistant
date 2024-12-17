@@ -1,0 +1,8 @@
+<view class="custom-nav">
+  <view class="status-bar" style="height:{{statusBarHeight}}px"></view>
+  <view class="nav-content">
+    <view class="menu-icon" bindtap="onLeftTap">☰</view>
+    <text class="title">{{title}}</text>
+    <view class="placeholder"></view>
+  </view>
+</view>

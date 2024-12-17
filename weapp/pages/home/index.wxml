@@ -1,81 +1,116 @@
-  <van-notify id="van-notify" />
+<sidebar 
+  show="{{showSidebar}}" 
+  bind:close="closeSidebar" 
+  bind:toggleView="toggleView"
+  userInfo="{{userInfo}}"
+  isHistoryView="{{isHistoryView}}"
+></sidebar>
+<view class="page-container {{showSidebar ? 'sidebar-open' : ''}}">
+  <custom-header 
+    title="{{isHistoryView ? '历史任务' : '👋 欢迎'}}" 
+    bind:toggleSidebar="toggleSidebar"
+  ></custom-header>
 
-<view >
-  <!-- 顶部图片 -->
-  <view class="top-image"> 
-  
-  <image class="top-image-image" src="../../static/lowcode-823213.png"></image>
-  <view class="text-container">
-  <text class="top-image-text-primary">Hi, 欢迎使用智能日程工具</text>
-  <text class="top-image-description">帮你识别并创建日程，
-  不错过任何重要事件。</text>
-  </view>
-  </view>
-  
 
-  <!-- 圆角的白底区域 -->
-  <view class="white-box">
-    <!-- 第一个按钮 -->
-    <view class="buttonScanTxt" bindtap="onScanTxtBtnClick">
-      <image class="button-image" src="../../static/text.png"></image>
-      <view class="button-title">从文本识别</view>
-      <!-- <view class="button-desc">请输入一段含有日程的文本</view> -->
-    </view>
 
-    <van-dialog
-    use-slot
-    title="日程信息"
-    show="{{ txtDialogShow }}"
-    show-cancel-button
-    bind:confirm="onTxtDialogConfirm"
-    bind:close="onTxtDialogClose"
-  >
-    <van-field
-      model:value="{{ txt }}"
-      label="文本："
-      type="textarea"
-      placeholder="请粘贴包含日程的一段文字"
-      autosize="{{textInputStyle}}"
-      clearable
-      border="{{ false }}"
-      confirm-type="识别日程"
-    />
-    <view class="tip-text"><van-icon name="info-o" />可以从短信,微信等消息中复制黏贴，可以包含一些无用的内容（字符）</view>
-    <view class="just-try" catchtap="justTryText">
-      <van-icon name="guide-o" />随便试试
-    </view>
-    
-    </van-dialog>
-
-    <!-- 第二个按钮 -->
-    <view class="buttonScanImg" bindtap="onScanImgBtnClick">
-      <image class="button-image" src="../../static/img.png"></image>
-      <view class="button-text">
-      <view class="button-title">从图片识别</view>
-      <!--<view class="button-desc">请上传一张含有日程的图片</view>-->
+  <view class="container {{hasSchedules ? 'container-with-schedules' : ''}}" style="padding-top: {{containerPadding}}px;">
+    <view class="schedule-container">
+      <view class="custom-refresh {{isRefreshing ? 'refreshing' : ''}}">
+        <view class="refresh-icon"></view>
+        <text class="refresh-text">{{isRefreshing ? '刷新中...' : '下拉刷新'}}</text>
+      </view>
+      
+      <block wx:if="{{hasSchedules}}">
+        <view class="schedule-list">
+          <block wx:for="{{timeSections}}" wx:key="title">
+            <view class="time-section">
+              <view class="section-title">{{item.title}}</view>
+              <view class="schedule-items">
+                <view class="schedule-item" wx:for="{{item.schedules}}" wx:for-item="schedule" wx:key="id" bindtap="showScheduleDetails" data-schedule="{{schedule}}">
+                  <view class="schedule-info">
+                    <view class="schedule-header">
+                      <text class="schedule-date">{{schedule.dateStr}}</text>
+                      <text class="schedule-time">{{schedule.timeStr}}</text>
+                    </view>
+                    <text class="schedule-description">{{schedule.title}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </block>
+      <view wx:else class="no-schedules">
+        <image src="/static/relax12.png" mode="aspectFit" class="no-schedules-image"></image>
+        <view class="no-schedules-text">
+          <text class="primary-text">{{isHistoryView ? '没有历史任务' : '没有待办任务'}}</text>
+          <text class="secondary-text">{{isHistoryView ? '去创建一些新任务吧' : '享受美好的一天吧'}}</text>
+        </view>
       </view>
     </view>
+  </view>
 
-        <!-- 第三个按钮 -->
-    <view class="buttonScanPdf" bindtap="onScanPdfBtnClick">
-      <image class="button-image" src="../../static/pdf.png"></image>
-      <view class="button-text">
-      <view class="button-title">从PDF识别</view>
-       <!--<view class="button-desc">请上传一张含有日程的PDF文件</view> -->
-       </view>
+  <view class="add-button-container {{showAddButton && !isHistoryView ? '' : 'hide'}}">
+    <view class="option-buttons-overlay {{showOptions ? 'show' : ''}}" bindtap="hideAddOptions"></view>
+    <view class="option-buttons {{showOptions ? 'show' : ''}}">
+      <view class="option-button pdf-option" bindtap="addFromPDF">
+        <image class="option-icon" src="/static/pdf.png" mode="aspectFit"></image>
+        <text class="option-text">PDF</text>
+      </view>
+      <view class="option-button image-option" bindtap="addFromImage">
+        <image class="option-icon" src="/static/img.png" mode="aspectFit"></image>
+        <text class="option-text">图片</text>
+      </view>
+      <view class="option-button text-option" bindtap="addFromText">
+        <image class="option-icon" src="/static/text.png" mode="aspectFit"></image>
+        <text class="option-text">文字</text>
+      </view>
+    </view>
+    <view class="add-button {{showOptions ? 'cancel' : ''}}" bindtap="toggleAddOptions">
+      <text class="{{showOptions ? 'cancel-icon' : 'add-icon'}}">{{showOptions ? '+' : '+'}}</text>
     </view>
   </view>
 
-  <view class="mask" wx:if="{{loadingShow}}">
-   <view class="wrapper">
-    <van-loading color="#1989fa" size="24px" vertical>{{loadingText}}</van-loading>
+  <schedule-details
+    show="{{showDetails}}"
+    loadingDetails="{{loadingDetails}}"
+    scheduleInfo="{{scheduleInfo}}"
+    lastScheduleType="{{lastScheduleType}}"
+    lastScheduleText="{{lastScheduleText}}"
+    keyboardHeight="{{keyboardHeight}}"
+    isNewSchedule="{{isNewSchedule}}"
+    bind:hide="onDetailsClose"
+    bind:create="onScheduleCreate"
+    bind:retry="retry"
+    bind:refresh="onScheduleRefresh"
+  ></schedule-details>
+
+  <view class="overlay {{showOverlay ? 'show' : ''}}"></view>
+
+  <!-- 在 <view class="page-container"> 内部，添加以下代码 -->
+  <view class="input-overlay {{showTextInput ? 'show' : ''}}" bindtap="hideTextInput"></view>
+
+  <!-- 修改文本输入弹出框部分 -->
+  <view class="text-input-popup {{showTextInput ? 'show' : ''}}" style="bottom: {{keyboardHeight}}px;">
+    <view class="text-input-content">
+      <textarea
+        class="text-input-area"
+        placeholder="请输入日程内容"
+        value="{{inputText}}"
+        bindinput="onTextInput"
+        focus="{{textareaFocus}}"
+        maxlength="-1"
+        adjust-position="{{false}}"
+        show-confirm-bar="{{false}}"
+      ></textarea>
+      <view class="button-container">
+        <view class="try-button" bindtap="justTryText">
+          <text class="try-text">随便试试</text>
+        </view>
+        <view class="send-button {{inputText ? '' : 'inactive'}}" bindtap="sendText">
+          <image class="send-icon" src="/static/send.png" mode="aspectFit"></image>
+        </view>
+      </view>
     </view>
   </view>
-
-  <view wx:if="{{showPrivacy}}">
-    <privacy-popup bind:agree="agree" bind:disagree="disagree"></privacy-popup>
 </view>
-
-</view>
-
-

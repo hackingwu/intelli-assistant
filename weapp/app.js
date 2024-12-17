@@ -1,12 +1,32 @@
-
-
-
 App({
+  onLaunch: function () {
+    // 全局分享配置
+    Page = (function (Page) {
+        return function (pageConfig) {
+            pageConfig.onShareAppMessage = function () {
+                return {
+                    title: '日程小帮手',
+                    path: '/pages/home/index',
+                    imageUrl: '/static/relax12.png'
+                };
+            };
+            pageConfig.onShareTimeline = function () {
+                return {
+                    title: '日程小帮手',
+                    path: '/pages/home/index',
+                    imageUrl: '/static/relax12.png'
+                };
+            };
+            return Page(pageConfig);
+        };
+    })(Page);
+},
+"shareTimeline": true,
   globalData: {
     needRetry: false,
-    API_KEY:'<server-api-key>',
-    ADMIN_HOST: 'https://xyz/admin',
-    // ADMIN_HOST:"http://localhost:8080/admin",
+    API_KEY:'d8y4XLDphC1W9dtDgt68d9toAi7HXT1P7KCH25b4',
+    ADMIN_HOST: 'https://lawyertools.cn/admin',
+    // ADMIN_HOST:"http://www.localhost:8080/admin",
     openid:'',
     inviteComment: false,
   },
@@ -81,7 +101,14 @@ App({
         content: (content).substring(0, 255)
       }
     })
-  }
+  },
+  onError(error) {
+    console.error('App onError:', error);
+    wx.showToast({
+      title: '发生错误，请重试',
+      icon: 'none'
+    });
+  },
   // 其他全局方法
   // ...
 });

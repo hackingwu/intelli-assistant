@@ -1,177 +1,620 @@
-
-
-
-
-.top-image {
-  /* 设置 top-image 区域的样式，可以根据实际情况调整 */
-  /* ... */
-  position: relative; 
-  align-items: center;/* 垂直居中 */
-}
-
-.top-image-image {
-  width: 100%; /* 设置图片宽度 */
-  height: 200px; /* 设置一个固定的高度 */
-  object-fit: cover; /* 图片按比例缩放，保持图片完整显示在容器内 */
-  
-}
-.text-container {
-  /* 文字区域样式 */
-  margin-left: 10px; /* 调整文字和图片之间的间距，根据实际情况调整 */
+/* 在文件顶部添加这段代码 */
+.custom-refresh {
+  height: 80rpx;
   display: flex;
-  position: absolute;
-  top: 60px; /* 文字容器距离图片顶部的距离，根据实际情况调整 */
-  flex-direction: column; /* 将文字纵向排列 */
-  justify-content: center; /* 垂直居中对齐文字 */
-}
-
-
-
-.top-image-text-primary {
-  /* 设置文字样式，实现靠左对齐 */
-  /* ... */
-  font-weight: bold;
-  font-size: 16px;
-  /* margin-left: 10px; 调整文字与图片之间的间距，根据需要自行调整 */
-}
-.top-image-description {
-  margin-top: 10px;
-  margin-left:20px;
-  font-size: 14px;
-  /* margin-left: 10px; 调整文字与图片之间的间距，根据需要自行调整 */
-}
-.white-box {
-  /* 设置圆角白底区域样式 */
-  background-color: #ffffff;
-  border-radius: 20px 20px 0 0; /* 顶部左右为圆角，底部不是圆角 */
-  padding: 10px; /* 可根据需要调整内边距 */
-  align-items: center; /* 将按钮容器内的内容居中显示 */
-
-}
-
-.buttonScanTxt, .buttonScanImg, .buttonScanPdf {
-  /* 设置按钮样式 */
-  display: flex;
-  align-items: center;
-  justify-content: center; /* 水平居中按钮容器内的内容 */
-  margin-bottom: 20px; /* 可根据需要调整按钮之间的间距 */
-  border-radius: 10px; /* 设置按钮的圆角 */
-  padding: 10px; /* 设置按钮的内边距 */
-}
-.buttonScanTxt {
-    background-color: #ebf0ff;
-}
-.buttonScanImg {
-    background-color: #fffae9;
-}
-.buttonScanPdf {
-    background-color: #f7f7f7;
-}
-.wrapper {
-  display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100%;
+  align-items: center;
+  transition: all 0.3s;
+  opacity: 0;
+  transform: translateY(-100%);
 }
 
-
-.button-image {
-  width: 60px; /* 设置按钮图片宽度 */
-  height: 60px; /* 设置按钮图片高度 */
-  /* 这里可以设置图片样式，比如圆角等 */
+.custom-refresh.refreshing {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.button-text {
-  flex-direction: column; /* 将文字纵向排列 */
-  justify-content: center; /* 垂直居中对齐文字 */
+.refresh-icon {
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid #4285F4;
+  border-top-color: transparent;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  animation: spin 1s linear infinite;
 }
 
-.button-title {
-  /* 设置按钮标题样式 */
-  font-size: 18px;
-  font-weight: bold;
-  /* 这里可以设置标题的颜色等样式 */
+.refresh-text {
+  font-size: 28rpx;
+  color: #4285F4;
 }
 
-.button-desc {
-  /* 设置按钮描述样式 */
-  font-size: 14px;
-  /* 这里可以设置描述的颜色等样式 */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-.tip-text {
-  margin-left: 16px;
-  font-size: 22rpx;
-  color: #999;
+/* 注释掉搜索栏样式
+.search-bar {
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 10rpx 20rpx;
+  margin-bottom: 20rpx;
 }
 
-
-
-.just-try {
-  margin-top: 10rpx;
-  padding: 16px;
+.search-input {
+  width: 100%;
   border: none;
-  background-color: transparent;
-  font-size: 25rpx;
-  color: #007AFF;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.just-try:focus,
-.just-try:active {
-  text-decoration: none;
   outline: none;
+  font-size: 28rpx;
+}
+*/
+
+/* 其余样式保持不变 */
+.container {
+  background-color: #F0F2F5;
+  min-height: 100vh;
+  padding: 40rpx 20rpx; /* 减小左右内边距 */
+  padding-top: calc(88rpx + env(safe-area-inset-top) + 80rpx); /* 调整这里 */
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-.mask {
+.container-with-schedules {
+  background: linear-gradient(to bottom, #f0f4ff, #FFFFFF);
+}
+
+.schedule-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding-top: 20px;
+}
+
+/* 修改标题样式 */
+.title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 修改菜单图标样式 */
+.menu-icon {
+  font-size: 48rpx;
+  color: #333;
+}
+
+/* 修改日程列表样式 */
+.schedule-list {
+  padding: 20rpx 30rpx; /* 增加左右内边距 */
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  text-align: left; /* 改为左对齐 */
+  padding-left: 20rpx; /* 添加左边距，使标题与左边界有一定距离 */
+}
+
+/* 修改日程卡片样式 */
+.schedule-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  background-color: transparent;
+  align-items: center; /* 居中显示 */
+}
+
+.schedule-item {
+  width: 100%;
+  max-width: 680rpx;
+  background-color: #ffffff;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.schedule-info {
+  width: 100%;
+  padding: 0 20rpx; /* 添加左右内边距 */
+}
+
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15rpx;
+  align-items: center;
+  padding: 0 5rpx; /* 添加左右内边距 */
+}
+
+.schedule-date {
+  font-size: 24rpx;
+  color: #4285F4; /* 使用蓝色 */
+  font-weight: 500;
+}
+
+.schedule-time {
+  font-size: 24rpx;
+  color: #34A853; /* 使用绿色 */
+  font-weight: 500;
+}
+
+.schedule-description {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 删除 .schedule-detail-btn 和 .detail-icon 相关样式 */
+
+/* 修改添加按钮样式 */
+.add-button-container {
   position: fixed;
-  left: 0;
+  right: 30rpx;
+  bottom: 140rpx; /* 保持不变或根据需要微调 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+}
+
+.option-buttons-overlay {
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.option-buttons-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.option-buttons {
+  position: absolute;
+  bottom: 180rpx; /* 增加这个值，使选项按钮组整体上移 */
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.option-buttons.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.option-button {
+  width: 240rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40rpx; /* 增加按钮之间的间距 */
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.option-buttons.show .option-button {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.option-buttons.show .option-button:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.option-buttons.show .option-button:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.option-buttons.show .option-button:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.option-icon {
+  width: 48rpx; /* 增加图标大小 */
+  height: 48rpx;
+  margin-right: 16rpx; /* 增加图标和文字之间的间距 */
+}
+
+.option-text {
+  font-size: 32rpx; /* 增加文字大小 */
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.pdf-option {
+  background-color: #8E44AD;
+}
+
+.image-option {
+  background-color: #27AE60;
+}
+
+.text-option {
+  background-color: #3498DB;
+}
+
+.add-button {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  background-color: #4285F4;
+  color: white;
+  font-size: 90rpx; /* 增加加号大小 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  line-height: 1;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  align-self: flex-end;
+  margin-right: 40rpx;
+}
+
+.add-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  background-color: rgba(66, 133, 244, 0.3);
+  z-index: -1;
+  animation: pulse 4s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+}
+
+.add-button.cancel {
+  transform: rotate(45deg);
+  background-color: #FF4081;
+}
+
+.add-button.cancel::before {
+  display: none;
+}
+
+.add-icon, .cancel-icon {
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 3;
+}
+
+.no-schedules {
+  flex: 1; /* 让这个容器占据剩余空间 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 垂直居中 */
+  align-items: center; /* 水平居中 */
+  padding-bottom: 50vh; /* 向上偏移一些，可以根据需要调整 */
+}
+
+.no-schedules-image {
+  width: 500rpx; /* 增加宽度 */
+
+}
+
+.no-schedules-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; /* 确保文字居中 */
+}
+
+.primary-text {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx; /* 增加底部边距 */
+}
+
+.secondary-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 在文件末尾添加���下样式 */
+.text-input-popup {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 999;
+  transition: bottom 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.text-input-popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.text-input-content {
+  padding: 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.text-input-area {
+  width: 100%;
+  min-height: 80rpx;
+  max-height: 200rpx;
+  border: 1px solid #ccc;
+  border-radius: 10rpx;
+  padding: 10rpx;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+}
+
+.try-button {
+  background-color: #4CAF50;
+  border-radius: 20rpx;
+  padding: 0 20rpx;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
 }
 
-.help-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+.try-text {
+  color: white;
+  font-size: 28rpx;
 }
 
-.help-button {
+.send-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #007AFF;
   display: flex;
   align-items: center;
-  background-color: #3498db;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
+  justify-content: center;
 }
 
-.help-icon {
-  font-size: 20px;
-  margin-right: 5px;
+.send-button.inactive {
+  opacity: 0.5;
 }
 
-.help-label {
-  font-size: 14px;
+.send-icon {
+  width: 24px;
+  height: 24px;
 }
 
-.help-content {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  position: absolute;
-  right: -130px;
+/* 添加蒙版样式 */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+.overlay.show {
+  display: block;
+}
+
+schedule-details {
+  z-index: 1000;
+}
+
+.loading-container {
+  position: fixed;
   top: 50%;
-  transform: translateY(-50%);
-  transition: right 0.3s ease;
-  z-index: 1;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
 }
+
+.loading-spinner {
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid #f3f3f3;
+  border-top: 4rpx solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.schedule-list {
+  padding: 5rpx;
+}
+
+.time-section {
+  margin-bottom: 40rpx;
+}
+
+
+.schedule-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 10rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.schedule-item:last-child {
+  border-bottom: none;
+}
+
+.schedule-info {
+  flex: 1;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -70%;
+  width: 70%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 1000;
+  transition: left 0.3s ease-out;
+}
+
+.sidebar.show {
+  left: 0;
+}
+
+.sidebar-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+.sidebar.show .sidebar-mask {
+  display: block;
+}
+
+.sidebar-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.sidebar-menu {
+  flex: 1;
+  padding: 20px;
+}
+
+.menu-item {
+  padding: 10px 0;
+  font-size: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.page-container {
+  transition: transform 0.3s ease-out;
+}
+
+.page-container.sidebar-open {
+  transform: translateX(80%);
+}
+
+/* 添加以下样式 */
+.input-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.input-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 修改 text-input-popup 的 z-index */
+.text-input-popup {
+  /* ... 其他样式保持不变 ... */
+  z-index: 999;
+}
+
+/* 添加一个新的样式来美化时间和日期的容器 */
+.schedule-datetime {
+  display: flex;
+  align-items: center;
+  background-color: #f0f4ff; /* 淡蓝色背景 */
+  border-radius: 20rpx;
+  padding: 6rpx 12rpx;
+}
+
+.schedule-datetime .schedule-date {
+  margin-right: 10rpx; /* 在日期和时间之间添加一些间距 */
+}
+
+/* 可以添加一个小图标来分隔日期和时间 */
+.schedule-datetime::after {
+  content: '•';
+  margin: 0 6rpx;
+  color: #888;
+}
+
+
+
+
+
+
+

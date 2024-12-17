@@ -1,54 +1,51 @@
 {
+  
   "pages": [
-    "pages/home/index",
-    "pages/schedule/index",
-    "pages/mine/index"
+    "pages/home/index"
   ],
+  "lazyCodeLoading": "requiredComponents",
   "__usePrivacyCheck__": true,
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/home/index",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/mine/index",
-        "text": "我的"
-      }
-    ]
-  },
+ 
   "permission": {
     "scope.addPhoneCalendar": {
       "desc": "需要给你手机日历创建日程"
+    },
+    "scope.userInfo": {
+      "desc": "需要获取您的头像信息以展示在应用中"
     }
   },
   "plugins": {
-    "wxacommentplugin": {
-      "version": "latest",
-      "provider": "wx82e6ae1175f264fa" 
-    }
+    
   },
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "智能日程",
+    "navigationBarTitleText": "👋欢迎",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
-  "usingComponents": {},
-  "useExtendedLib": {},
+  
+ 
+  "usingComponents": {
+    "custom-header": "/components/custom-header/custom-header",
+    "schedule-details": "/components/schedule-details/schedule-details",
+    "sidebar": "/components/sidebar/sidebar"
+  },
+  "useExtendedLib": {
+    "weui": true
+  },
   "supportedMaterials": [
-      {
-          "materialType": "image/*",
-          "name": "用${nickname}识别日程",
-          "desc": "使用该图片创建日程",
-          "path": "pages/home/index"
-      },
-      {
-          "materialType": "application/pdf",
-          "name": "用${nickname}创建日程",
-          "desc": "使用该PDF创建日程",
-          "path": "pages/home/index"
-      }
+    {
+      "materialType": "image/*",
+      "name": "用${nickname}识创建日程",
+      "desc": "使用该图片创建日程",
+      "path": "pages/home/index"
+    },
+    {
+      "materialType": "application/pdf",
+      "name": "用${nickname}创建日程",
+      "desc": "使用该PDF创建日程",
+      "path": "pages/home/index"
+    }
   ]
 }

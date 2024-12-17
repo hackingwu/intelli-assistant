@@ -1,0 +1,100 @@
+<view class="mask {{show ? 'show' : ''}}" bindtap="onHide"></view>
+<view class="details-container {{show ? 'show' : ''}}" style="bottom: {{keyboardHeight}}px;">
+  <view class="drag-indicator"></view>
+  
+  <scroll-view scroll-y="true" class="details-content" style="max-height: calc(100vh - {{keyboardHeight}}px - 100rpx);">
+    <view class="content-wrapper">
+      <view class="close-button" bindtap="onHide">
+        <text class="icon-x">×</text>
+      </view>
+
+      <view class="schedule-details {{show ? 'show' : ''}}">
+        <view wx:if="{{loadingDetails}}" class="skeleton-loading">
+          <view class="skeleton-title"></view>
+          <view class="skeleton-text"></view>
+          <view class="skeleton-text"></view>
+          <view class="skeleton-text"></view>
+          <view class="skeleton-text"></view>
+        </view>
+        <view wx:else>
+          <view class="title">
+            <input 
+              value="{{scheduleInfo.title}}" 
+              bind:input="onTitleInput" 
+              bind:focus="onInputFocus"
+              data-class="title-input"
+              placeholder="日程标题"
+              adjust-position="{{false}}"
+            />
+          </view>
+
+          <view class="detail-item border-bottom">
+            <view class="location">
+              <text class="icon-map-pin">📍</text>
+              <input 
+                value="{{scheduleInfo.location}}" 
+                bind:input="onLocationInput" 
+                placeholder="地点"
+                adjust-position="{{false}}"
+              />
+            </view>
+          </view>
+
+          <view class="time-reminder">
+            <view class="time-info">
+              <view class="date">
+                <text class="icon-calendar">📅</text>
+                <picker mode="date" value="{{scheduleInfo.dateStr}}" start="2015-09-01" end="2035-09-01" bindchange="onDateChange">
+                  <view class="picker">{{scheduleInfo.dateStr}}</view>
+                </picker>
+              </view>
+              <view class="time">
+                <text class="icon-clock">🕒</text>
+                <picker mode="time" value="{{scheduleInfo.timeStr}}" start="00:00" end="23:59" bindchange="onTimeChange">
+                  <view class="picker">{{scheduleInfo.timeStr}}</view>
+                </picker>
+              </view>
+            </view>
+            <view class="reminder">
+              <text class="icon-bell">🔔</text>
+              <picker bindchange="onReminderChange" value="{{scheduleInfo.alarmOffset === undefined ? 0 : scheduleInfo.alarmOffset}}" range="{{alarmOptions}}" range-key="label">
+                <view class="weui-select">{{(scheduleInfo.alarmOffset !== undefined && alarmOptionsMap[scheduleInfo.alarmOffset]) || alarmOptionsMap[0]}}</view>
+              </picker>
+            </view>
+          </view>
+
+          <view class="description">
+            <textarea 
+              value="{{scheduleInfo.description}}" 
+              bind:input="onDescriptionInput" 
+              bind:focus="onInputFocus"
+              placeholder="描述" 
+              maxlength="-1"
+              auto-height
+              style="width: 100%; min-height: 100px;"
+            ></textarea>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="footer" wx:if="{{!loadingDetails}}">
+    <block wx:if="{{isNewSchedule}}">
+      <button class="footer-button retry" bindtap="onRetry">
+        <text class="icon-refresh-cw">🔄</text>
+        重新识别
+      </button>
+      <button class="footer-button create" bindtap="onScheduleCreate">
+        <text class="icon-plus">+</text>
+        创建
+      </button>
+    </block>
+    <block wx:else>
+      <button class="footer-button recreate" bindtap="onRecreateSchedule">
+        <text class="icon-plus">+</text>
+        再次创建
+      </button>
+    </block>
+  </view>
+</view>
