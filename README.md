@@ -14,9 +14,7 @@
 客户端选择微信小程序，用户使用成本最小，也支持添加系统日历的功能。
 
 # 预览
-<img style="width:100px;" src="imgs/demo_1.jpg" alt="截图1">
-<img style="width:100px;" src="imgs/demo_2.jpg" alt="截图2">
-<img style="width:100px;" src="imgs/demo_3.jpg" alt="截图3">
+![截图1](imgs/demo_1.jpg) ![截图2](imgs/demo_2.jpg) ![截图3](imgs/demo_3.jpg)
 
 ## server
 
